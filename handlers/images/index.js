@@ -33,26 +33,7 @@ function convert_to_jpg(input_file, output_file, reply){
 }
 
 
-function resize(file, height, width, reply) {
-  if (height) {
-    gm(file)
-      .resize(240, 240)
-      .noProfile()
-      .write('/path/to/resize.png', function (err) {
-        if (err) {
-          console.dir(arguments);
-        }
-        console.log(this.outname + " resized  ::  " + arguments[3])
-        reply(file)
-      });
-    } else {
-      reply(file)
-    }
-}
-
-
 function watermark(file, watermark_file, output_file, reply) {
-  console.log("test")
   gm(file)
     .composite(watermark_file).gravity("Center")
     .write(output_file, function(err, stdout, stderr, command){
