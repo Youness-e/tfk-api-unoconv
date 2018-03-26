@@ -4,7 +4,7 @@ const Hapi = require('hapi')
 const Inert = require('inert')
 const server = new Hapi.Server()
 const config = require('./config')
-const unoconvService = require('./index')
+const convertService = require('./index')
 
 server.connection({
   port: parseInt(config.SERVER_PORT, 10),
@@ -17,7 +17,7 @@ server.connection({
 
 server.register([
   {
-    register: unoconvService,
+    register: convertService,
     options: {}
   },
   {

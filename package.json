@@ -1,10 +1,10 @@
 {
-  "name": "tfk-api-unoconv",
+  "name": "tfk-api-convert",
   "version": "3.2.2",
   "private": true,
-  "description": "Unoconv as a webservice",
+  "description": "Unoconv & imagemagick as a webservice",
   "author": {
-    "name": "Geir Gåsodden",
+    "name": "Geir Gåsodden & Youness El Ghazi",
     "email": "geir.gasodden@pythonia.no",
     "url": "https://github.com/zrrrzzt"
   },
@@ -33,6 +33,7 @@
     "hapi": "16.6.2",
     "inert": "4.2.1",
     "unoconv2": "1.0.0",
+    "gm": "1.23.1",
     "uuid": "3.2.1"
   },
   "devDependencies": {

@@ -1,7 +1,8 @@
 'use strict'
 
 const config = require('../config')
-const handlers = require('../handlers')
+const document_handler = require('../handlers/documents/')
+const images_handler = require('../handlers/images/')
 
 module.exports = [
   {
@@ -18,35 +19,69 @@ module.exports = [
         server: parseInt(config.TIMEOUT_SERVER, 10),
         socket: parseInt(config.TIMEOUT_SOCKET, 10)
       },
-      handler: handlers.handleUpload
+      handler: document_handler.handleUpload
     }
   },
   {
     method: 'GET',
     path: '/unoconv/formats',
     config: {
-      handler: handlers.showFormats
+      handler: document_handler.showFormats
     }
   },
   {
     method: 'GET',
     path: '/unoconv/formats/{type}',
     config: {
-      handler: handlers.showFormat
+      handler: document_handler.showFormat
     }
   },
   {
     method: 'GET',
     path: '/unoconv/versions',
     config: {
-      handler: handlers.showVersions
+      handler: document_handler.showVersions
     }
   },
   {
     method: 'GET',
     path: '/healthz',
     config: {
-      handler: handlers.healthcheck
+      handler: document_handler.healthcheck
+    }
+  },
+  {
+    method: 'POST',
+    path: '/image/jpg',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: 'multipart/form-data',
+        maxBytes: parseInt(config.PAYLOAD_MAX_SIZE, 10)
+      },
+      timeout: {
+        server: parseInt(config.TIMEOUT_SERVER, 10),
+        socket: parseInt(config.TIMEOUT_SOCKET, 10)
+      },
+      handler: images_handler.convert_jpg
+    }
+  },
+  {
+    method: 'POST',
+    path: '/image/watermark',
+    config: {
+      payload: {
+        output: 'stream',
+        parse: true,
+        allow: 'multipart/form-data',
+        maxBytes: parseInt(config.PAYLOAD_MAX_SIZE, 10)
+      },
+      timeout: {
+        server: parseInt(config.TIMEOUT_SERVER, 10),
+        socket: parseInt(config.TIMEOUT_SOCKET, 10)
+      },
+      handler: images_handler.watermark
     }
   }
 ]
